@@ -6,7 +6,9 @@ import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
 import { Toolbar } from "./toolbar";
 import { Footer } from "./footer";
+import { ActiveTool } from "../types";
 const Editor = () => {
+  console.log("init");
   const { init } = useEditor();
   const canvasRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,10 +22,20 @@ const Editor = () => {
       initialCanvas: canvas,
       initialContainer: containerRef.current!,
     });
+    return () => {
+      canvas.dispose();
+    };
   }, [init]);
   return (
     <div className="h-full flex flex-col">
-      <Navbar />
+      <Navbar
+        id={""}
+        editor={undefined}
+        activeTool={"select"}
+        onChangeActiveTool={function (tool: ActiveTool): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
       <div className="absolute h-[calc(100%-68px)] w-full top-[68px] flex">
         <Sidebar />
         <main className="bg-muted flex-1 overflow-auto relative flex flex-col">
