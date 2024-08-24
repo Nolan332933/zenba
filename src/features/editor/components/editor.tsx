@@ -37,7 +37,13 @@ const Editor = () => {
         }}
       />
       <div className="absolute h-[calc(100%-68px)] w-full top-[68px] flex">
-        <Sidebar />
+        <Sidebar
+          activeTool={"select"}
+          onChangeActiveTool={function (tool: ActiveTool): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
+        //check later
         <main className="bg-muted flex-1 overflow-auto relative flex flex-col">
           <Toolbar />
           <div
